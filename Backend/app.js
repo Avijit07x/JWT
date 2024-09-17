@@ -12,7 +12,7 @@ const port = process.env.PORT || 3000;
 
 app.use(
 	cors({
-		origin: ["http://localhost:5173"],
+		origin: "http://localhost:5173",
 		credentials: true,
 	})
 );
@@ -33,3 +33,5 @@ app.use("/auth", verifyRoute);
 app.listen(port, () => {
 	console.log(`Example app listening on port ${port}`);
 });
+
+export default app;
