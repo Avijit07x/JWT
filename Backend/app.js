@@ -30,8 +30,8 @@ app.use("/auth", registerRoute);
 app.use("/auth", logoutRoute);
 app.use("/auth", verifyRoute);
 
-// app.listen(port, () => {
-// 	console.log(`Example app listening on port ${port}`);
-// });
+app.listen(port, () => {
+	console.log(`Example app listening on port ${port}`);
+});
 
-export default app;
+
