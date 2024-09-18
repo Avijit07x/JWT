@@ -1,7 +1,7 @@
-import bcrypt from "bcryptjs";
-import express from "express";
-import jwt from "jsonwebtoken";
-import { User } from "../models/User.js";
+const bcrypt = require("bcryptjs");
+const express = require("express");
+const jwt = require("jsonwebtoken");
+const { User } = require("../models/User");
 
 const router = express.Router();
 
@@ -9,15 +9,19 @@ router.post("/register", async (req, res) => {
 	try {
 		// validate request
 		const { username, email, password } = req.body;
-		
+
 		if (!(username && email && password)) {
-			return res.status(400).json({ success: false, error: "All fields are required" });
+			return res
+				.status(400)
+				.json({ success: false, error: "All fields are required" });
 		}
 
 		// check if user already exists
 		const oldUser = await User.findOne({ email });
 		if (oldUser) {
-			return res.status(409).json({ success: false, error: "User already exists" });
+			return res
+				.status(409)
+				.json({ success: false, error: "User already exists" });
 		}
 
 		//Encrypt password
@@ -45,10 +49,12 @@ router.post("/register", async (req, res) => {
 		user.password = undefined;
 
 		// return new user
-		res.status(201).json({ success: true, user, message: "User created successfully" });
+		res
+			.status(201)
+			.json({ success: true, user, message: "User created successfully" });
 	} catch (error) {
 		res.status(500).json({ success: false, message: error.message });
 	}
 });
 
-export default router;
+module.exports = router;

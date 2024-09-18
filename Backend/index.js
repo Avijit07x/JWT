@@ -1,11 +1,11 @@
-import cookieParser from "cookie-parser";
-import cors from "cors";
-import express from "express";
-import loginRoute from "./routes/loginRoute.js";
-import logoutRoute from "./routes/logoutRoute.js";
-import registerRoute from "./routes/registerRoute.js";
-import verifyRoute from "./routes/verify.js";
-import { connectToDb } from "./utils/connectToDb.js";
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
+const express = require("express");
+const loginRoute = require("./routes/loginRoute");
+const logoutRoute = require("./routes/logoutRoute");
+const registerRoute = require("./routes/registerRoute");
+const verifyRoute = require("./routes/verify");
+const { connectToDb } = require("./utils/connectToDb");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -18,7 +18,8 @@ app.use(
 );
 app.use(express.json());
 app.use(cookieParser());
-await connectToDb();
+
+connectToDb(); 
 
 app.get("/", (req, res) => {
 	res.send("Hello World!");
@@ -33,5 +34,3 @@ app.use("/auth", verifyRoute);
 app.listen(port, () => {
 	console.log(`Example app listening on port ${port}`);
 });
-
-

@@ -1,6 +1,6 @@
-import express from "express";
-import jwt from "jsonwebtoken";
-import { User } from "../models/User";
+const express = require("express");
+const jwt = require("jsonwebtoken");
+const { User } = require("../models/User");
 const router = express.Router();
 
 // verify route
@@ -47,4 +47,4 @@ router.get("/verify", async (req, res) => {
 	}
 });
 
-export default router;
+module.exports = router;
